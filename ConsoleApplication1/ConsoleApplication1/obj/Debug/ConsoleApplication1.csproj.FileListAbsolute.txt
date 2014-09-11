@@ -2,3 +2,15 @@ C:\Users\pfloyd13\Documents\Visual Studio 2013\ConsoleApplication1\ConsoleApplic
 C:\Users\pfloyd13\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
 C:\Users\pfloyd13\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\pfloyd13\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\PdfSharp.Charting.dll
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\PdfSharp.dll
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\PdfSharp.xml
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\PdfSharp.Charting.xml
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
