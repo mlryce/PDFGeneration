@@ -44,15 +44,27 @@ namespace ConsoleApplication1
             Xtest.DrawRoundedRectangle(pen, 235, 362, 150, 60, 40, 40);
 
             XgraphicTest.DrawRoundedRectangle(pen, 450, 20, 150, 60, 40, 40); 
-        
+       
+            //Draw Med-Pass Logo
+            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\MedPassLogo.jpg", 75, 15, 129, 36);
 
-        
-            //Save The Doc 
-            const string filename = "MeddPassTestDoc.pdf";
+            Console.WriteLine("Please enter your name:");
+            Console.Write(">  ");
+            String name = Console.ReadLine();
+
+            XgraphicTest.DrawString("Student Name: " + name, font, XBrushes.Black, new XRect(185, 60, 40, 20), XStringFormats.Center);
+
+            //Save The Doc
+            const string filename = "MeddPassTestDoc4.pdf";
             document.Save(filename);
             Process.Start(filename); 
             
         }
-    } 
 
+        static void DrawImage(XGraphics gfx, string jpegSamplePath, int x, int y, int width, int height)
+        {
+            XImage image = XImage.FromFile(jpegSamplePath);
+            gfx.DrawImage(image, x, y, width, height);
+        }
+    } 
 }
