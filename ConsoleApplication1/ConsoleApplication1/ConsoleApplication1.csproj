@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\data_matrix.cs" />
+    <Compile Include="classes\immunization_form.cs" />
+    <Compile Include="classes\organization.cs" />
+    <Compile Include="classes\signature_box.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
