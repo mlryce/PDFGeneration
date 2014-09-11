@@ -21,41 +21,41 @@ namespace ConsoleApplication1
 
             //Creating empty page 
             PdfPage page = document.AddPage();
-            PdfPage page2 = document.AddPage(); 
          
+
 
             //Xgraphics object used for drawing 
             XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
-            XGraphics Xtest = XGraphics.FromPdfPage(page2); 
          
 
+
             //Creating a font 
-            XFont font = new XFont("Arial", 20, XFontStyle.Regular); 
+            XFont font = new XFont("Arial", 20, XFontStyle.Bold);
+            XFont font2 = new XFont("Arial", 15, XFontStyle.Bold); 
 
             //Drawing the text  
             
-            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(350,20,150,60), XStringFormats.Center);
-            Xtest.DrawString("Please Work", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center); 
-            Xtest.DrawString("2nd Line", font, XBrushes.Black, new XRect(250,362,150,60), XStringFormats.TopLeft);
+            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370,5,150,60), XStringFormats.Center);
+            XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
            
 
             // Draw Rectangle 
             XPen pen = new XPen(XColors.Blue, Math.PI);
-            Xtest.DrawRoundedRectangle(pen, 235, 362, 150, 60, 40, 40);
+   
 
-            XgraphicTest.DrawRoundedRectangle(pen, 450, 20, 150, 60, 40, 40); 
-       
+
+        
             //Draw Med-Pass Logo
             DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\MedPassLogo.jpg", 75, 15, 129, 36);
 
             Console.WriteLine("Please enter your name:");
             Console.Write(">  ");
             String name = Console.ReadLine();
-
+        
             XgraphicTest.DrawString("Student Name: " + name, font, XBrushes.Black, new XRect(185, 60, 40, 20), XStringFormats.Center);
 
-            //Save The Doc
-            const string filename = "MeddPassTestDoc4.pdf";
+            //Save The Doc 
+            const string filename = "MeddPassTestDoc.pdf";
             document.Save(filename);
             Process.Start(filename); 
             
