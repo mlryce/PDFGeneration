@@ -8,6 +8,8 @@ using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using ConsoleApplication1.classes;
+
 
 namespace ConsoleApplication1
 {
@@ -15,6 +17,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            organization school = new organization();
+           
             //Creating New PDF Doc. 
             PdfDocument document = new PdfDocument();
             document.Info.Title = "Created By MedPass Team"; 
@@ -51,6 +55,8 @@ namespace ConsoleApplication1
             const string filename = "MeddPassTestDoc6.pdf";
             document.Save(filename);
             Process.Start(filename); 
+
+            
             
         }
     } 
