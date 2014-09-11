@@ -22,12 +22,12 @@ namespace ConsoleApplication1
             //Creating empty page 
             PdfPage page = document.AddPage();
          
-         
+
 
             //Xgraphics object used for drawing 
             XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
-          
          
+
 
             //Creating a font 
             XFont font = new XFont("Arial", 20, XFontStyle.Bold);
@@ -43,16 +43,28 @@ namespace ConsoleApplication1
             XPen pen = new XPen(XColors.Blue, Math.PI);
    
 
-        
-        
 
         
+            //Draw Med-Pass Logo
+            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\MedPassLogo.jpg", 75, 15, 129, 36);
+
+            Console.WriteLine("Please enter your name:");
+            Console.Write(">  ");
+            String name = Console.ReadLine();
+        
+            XgraphicTest.DrawString("Student Name: " + name, font, XBrushes.Black, new XRect(185, 60, 40, 20), XStringFormats.Center);
+
             //Save The Doc 
-            const string filename = "MeddPassTestDoc6.pdf";
+            const string filename = "MeddPassTestDoc.pdf";
             document.Save(filename);
             Process.Start(filename); 
             
         }
-    } 
 
+        static void DrawImage(XGraphics gfx, string jpegSamplePath, int x, int y, int width, int height)
+        {
+            XImage image = XImage.FromFile(jpegSamplePath);
+            gfx.DrawImage(image, x, y, width, height);
+        }
+    } 
 }
