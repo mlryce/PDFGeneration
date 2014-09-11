@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PdfSharp;
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace ConsoleApplication1
 {
@@ -14,7 +19,11 @@ namespace ConsoleApplication1
             Console.ReadLine();
             Console.WriteLine("PDF Sharp is the bestest");
 
-            int hello = 1;
+
+            PdfDocument document = new PdfDocument();
+            PdfPage page = document.AddPage();
+
+
         }
     }
 }
