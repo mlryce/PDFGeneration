@@ -31,12 +31,12 @@ namespace ConsoleApplication1
 
             //Creating a font 
             XFont font = new XFont("Arial", 20, XFontStyle.Bold);
-            XFont font2 = new XFont("Arial", 15, XFontStyle.Regular); 
+            XFont font2 = new XFont("Arial", 15, XFontStyle.Bold); 
 
             //Drawing the text  
             
-            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(360,20,150,60), XStringFormats.Center);
-            XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(360, 40, 150, 60), XStringFormats.Center);
+            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370,5,150,60), XStringFormats.Center);
+            XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
            
 
             // Draw Rectangle 
@@ -48,7 +48,7 @@ namespace ConsoleApplication1
 
         
             //Save The Doc 
-            const string filename = "MeddPassTestDoc5.pdf";
+            const string filename = "MeddPassTestDoc6.pdf";
             document.Save(filename);
             Process.Start(filename); 
             
