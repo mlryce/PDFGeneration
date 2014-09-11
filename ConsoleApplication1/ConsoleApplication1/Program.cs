@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PdfSharp;
+using System.Diagnostics;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
-using System.Diagnostics;
 
 namespace ConsoleApplication1
 {
@@ -16,34 +15,44 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            // Create a new PDF document
-            PdfDocument doc = new PdfDocument();
-            doc.Info.Title = "Created with PDFsharp";
+            //Creating New PDF Doc. 
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "Created By MedPass Team"; 
 
-            // Create an empty page
-            PdfPage page = doc.AddPage();
+            //Creating empty page 
+            PdfPage page = document.AddPage();
+            PdfPage page2 = document.AddPage(); 
+         
 
-            // Get an XGraphics obj for drawing
-            XGraphics gfx = XGraphics.FromPdfPage(page);
+            //Xgraphics object used for drawing 
+            XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
+            XGraphics Xtest = XGraphics.FromPdfPage(page2); 
+         
 
-            // Create a font
-            XFont font = new XFont("Verdana", 20, XFontStyle.BoldItalic);
+            //Creating a font 
+            XFont font = new XFont("Arial", 20, XFontStyle.Regular); 
 
-            // Draw the text
-            gfx.DrawString("Hello, World!", font, XBrushes.Black,
-                new XRect(0, 0, page.Width, page.Height),
-                XStringFormats.Center);
+            //Drawing the text  
+            
+            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(350,20,150,60), XStringFormats.Center);
+            Xtest.DrawString("Please Work", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center); 
+            Xtest.DrawString("2nd Line", font, XBrushes.Black, new XRect(250,362,150,60), XStringFormats.TopLeft);
+           
 
-            // save the document ...
-            const string filename = "HelloWorld.pfd";
-            doc.Save(filename);
-            // ... and start a viewer.
-            Process.Start(filename);
+            // Draw Rectangle 
+            XPen pen = new XPen(XColors.Blue, Math.PI);
+            Xtest.DrawRoundedRectangle(pen, 235, 362, 150, 60, 40, 40);
 
+            XgraphicTest.DrawRoundedRectangle(pen, 450, 20, 150, 60, 40, 40); 
+        
 
-
-
-
+        
+            //Save The Doc 
+            const string filename = "MeddPassTestDoc.pdf";
+            document.Save(filename);
+            Process.Start(filename); 
+            
         }
-    }
+    } 
+
 }
