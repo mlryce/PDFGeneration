@@ -35,12 +35,14 @@ namespace ConsoleApplication1
             XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
             XFont studentFont = new XFont("Arial", 14, XFontStyle.Bold);
             XFont immunFont = new XFont("Arial", 12, XFontStyle.Bold);
+            XFont topStatement = new XFont("Arial", 10, XFontStyle.Regular); 
 
             //Drawing the text  
 
             XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370, 5, 150, 60), XStringFormats.Center);
             XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
-
+            XgraphicTest.DrawString("Complete and upload to medpasshealth.com by 12/01/1776", topStatement, XBrushes.Black, new XRect(377, 40, 150, 60), XStringFormats.Center);  
+           
 
             // Draw Rectangle 
             XPen pen = new XPen(XColors.Blue, Math.PI);
@@ -49,12 +51,13 @@ namespace ConsoleApplication1
 
 
             //Draw Med-Pass Logo
-            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\GitHub\\PDFGeneration\\ConsoleApplication1\\ConsoleApplication1\\Images\\MedPassLogo.jpg", 75, 15, 129, 36);
+           
 
             Console.WriteLine("Please enter your name:");
             Console.Write(">  ");
             String name = Console.ReadLine();
-
+            Console.WriteLine("Please enter your DOB:"); 
+            string DOB = Console.ReadLine(); 
             Console.WriteLine("How many immunizations are Required?");
             Console.Write(">  ");
             string buffer = Console.ReadLine();
@@ -73,9 +76,9 @@ namespace ConsoleApplication1
                     counter++;
                 }
             }
-            
 
-            XgraphicTest.DrawString("Student Name: " + name, studentFont, XBrushes.Black, new XRect(80, 70, 0, 0), XStringFormats.Default);
+            XgraphicTest.DrawString("Date of Birth: " + DOB, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center); 
+            XgraphicTest.DrawString("Student Name: " + name, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
             //Required Immunizations Rectangle 1 - Major Rectangle
             DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
             //Required Immunizations Rectangle 2 - Dividing Rectangle
@@ -97,11 +100,7 @@ namespace ConsoleApplication1
 
         }
 
-        static void DrawImage(XGraphics gfx, string jpegSamplePath, int x, int y, int width, int height)
-        {
-            XImage image = XImage.FromFile(jpegSamplePath);
-            gfx.DrawImage(image, x, y, width, height);
-        }
+        
 
         static void DrawRectangle(XGraphics gfx, int x, int y, int width, int height)
         {
