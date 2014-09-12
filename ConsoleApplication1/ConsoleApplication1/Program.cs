@@ -59,10 +59,24 @@ namespace ConsoleApplication1
             string buffer = Console.ReadLine();
             int requiredImmunizations = Int32.Parse(buffer);
 
+            if (requiredImmunizations != 0)
+            { 
+                int counter = 0;
+                //List<>
+                while (counter < requiredImmunizations)
+                {
+                    Console.WriteLine("Please enter the name of an immunization:");
+                    Console.Write(">  ");
+
+                }
+            }
+
             XgraphicTest.DrawString("Student Name: " + name, font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
 
             
             DrawRectangle(XgraphicTest, requiredImmunizations);
+            XgraphicTest.DrawString("Deadly Disease No. 1", font3, XBrushes.Black, new XRect(80, 110, 0, 0), XStringFormats.Center);
+
 
 
             //Save The Doc 
@@ -82,7 +96,7 @@ namespace ConsoleApplication1
         {
             XPen pen = new XPen(XColors.Black, Math.PI);
 
-            gfx.DrawRectangle(pen, 25, 100, 560, requiredImmunizations * 50);
+            gfx.DrawRectangle(pen, 25, 100, 560, requiredImmunizations * 25);
         }
     }
 }
