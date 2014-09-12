@@ -33,7 +33,8 @@ namespace ConsoleApplication1
             //Creating a font 
             XFont font = new XFont("Arial", 20, XFontStyle.Bold);
             XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
-            XFont font3 = new XFont("Arial", 10, XFontStyle.Bold);
+            XFont studentFont = new XFont("Arial", 14, XFontStyle.Bold);
+            XFont immunFont = new XFont("Arial", 12, XFontStyle.Bold);
 
             //Drawing the text  
 
@@ -59,7 +60,7 @@ namespace ConsoleApplication1
             string buffer = Console.ReadLine();
             int requiredImmunizations = Int32.Parse(buffer);
             int counter = 0;
-            List<string> requiredImmunizationNames = new List<string>;
+            List<string> requiredImmunizationNames = new List<string>();
 
             if (requiredImmunizations != 0)
             { 
@@ -69,21 +70,25 @@ namespace ConsoleApplication1
                     Console.Write(">  ");
 
                     requiredImmunizationNames.Add(Console.ReadLine());
+                    counter++;
                 }
             }
             
 
-            XgraphicTest.DrawString("Student Name: " + name, font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
-            DrawRectangle(XgraphicTest, requiredImmunizations);
-
+            XgraphicTest.DrawString("Student Name: " + name, studentFont, XBrushes.Black, new XRect(80, 70, 0, 0), XStringFormats.Default);
+            //Required Immunizations Rectangle 1 - Major Rectangle
+            DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
+            //Required Immunizations Rectangle 2 - Dividing Rectangle
+            DrawRectangle(XgraphicTest, 105, 100, 470, requiredImmunizations * 20);
+            //DrawImage(XgraphicTest, );
             counter = 0;
             while (counter < requiredImmunizations)
             {
-                XgraphicTest.DrawString(requiredImmunizationNames[counter], font3, XBrushes.Black, new XRect(80, 110, 0, 0), XStringFormats.Center);
+                int veriticalPosition = 20 * counter;
+                XgraphicTest.DrawString(requiredImmunizationNames[counter], immunFont, XBrushes.Black, new XRect(40, 115 + veriticalPosition, 0, 0), XStringFormats.Default);
+
+                counter++;
             }
-
-
-
 
             //Save The Doc 
             const string filename = "MeddPassTestDoc2.pdf";
@@ -98,11 +103,11 @@ namespace ConsoleApplication1
             gfx.DrawImage(image, x, y, width, height);
         }
 
-        static void DrawRectangle(XGraphics gfx, int requiredImmunizations)
+        static void DrawRectangle(XGraphics gfx, int x, int y, int width, int height)
         {
             XPen pen = new XPen(XColors.Black, Math.PI);
-
-            gfx.DrawRectangle(pen, 25, 100, 560, requiredImmunizations * 25);
+            
+            gfx.DrawRectangle(pen, x, y, width, height);
         }
     }
 }
