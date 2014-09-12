@@ -16,10 +16,15 @@ namespace ConsoleApplication1.classes
                 this.organization_name = name;
             }
 
-            public organization(){
+            public organization(string name){
 
-                this.organization_name = "test";
+                this.organization_name = name;
 
+            }
+
+            public organization()
+            {
+                // TODO: Complete member initialization
             }
    
     }
