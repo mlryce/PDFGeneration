@@ -48,7 +48,7 @@ namespace ConsoleApplication1
 
 
             //Draw Med-Pass Logo
-            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\MedPassLogo.jpg", 75, 15, 129, 36);
+            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\GitHub\\PDFGeneration\\ConsoleApplication1\\ConsoleApplication1\\Images\\MedPassLogo.jpg", 75, 15, 129, 36);
 
             Console.WriteLine("Please enter your name:");
             Console.Write(">  ");
@@ -58,24 +58,30 @@ namespace ConsoleApplication1
             Console.Write(">  ");
             string buffer = Console.ReadLine();
             int requiredImmunizations = Int32.Parse(buffer);
+            int counter = 0;
+            List<string> requiredImmunizationNames = new List<string>;
 
             if (requiredImmunizations != 0)
             { 
-                int counter = 0;
-                //List<>
                 while (counter < requiredImmunizations)
                 {
                     Console.WriteLine("Please enter the name of an immunization:");
                     Console.Write(">  ");
 
+                    requiredImmunizationNames.Add(Console.ReadLine());
                 }
             }
+            
 
             XgraphicTest.DrawString("Student Name: " + name, font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
-
-            
             DrawRectangle(XgraphicTest, requiredImmunizations);
-            XgraphicTest.DrawString("Deadly Disease No. 1", font3, XBrushes.Black, new XRect(80, 110, 0, 0), XStringFormats.Center);
+
+            counter = 0;
+            while (counter < requiredImmunizations)
+            {
+                XgraphicTest.DrawString(requiredImmunizationNames[counter], font3, XBrushes.Black, new XRect(80, 110, 0, 0), XStringFormats.Center);
+            }
+
 
 
 
