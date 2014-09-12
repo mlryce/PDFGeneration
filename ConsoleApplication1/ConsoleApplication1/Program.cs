@@ -35,11 +35,32 @@ namespace ConsoleApplication1
             XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
             XFont font3 = new XFont("Arial", 10, XFontStyle.Bold);
 
+
+
+            //Gathering info for text 
+
+            Console.WriteLine("Please enter your name:");
+            Console.Write(">  ");
+            String name = Console.ReadLine();
+
+            Console.WriteLine("Please enter your date of birth");
+            String DOB = Console.ReadLine();
+
+            Console.WriteLine("How many immunizations are Required?");
+            Console.Write(">  ");
+            string buffer = Console.ReadLine();
+            int requiredImmunizations = Int32.Parse(buffer);
+            int counter = 0;
+            List<string> requiredImmunizationNames = new List<string>(); 
+
             //Drawing the text  
 
             XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370, 5, 150, 60), XStringFormats.Center);
             XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
+            XgraphicTest.DrawString("Complete and upload to www.medpasshealth.com by 12/1/1965", font3, XBrushes.Black, new XRect(360, 45, 150, 60), XStringFormats.Center); 
+            XgraphicTest.DrawString("DOB:" + DOB, font2, XBrushes.Black, new XRect(453, 65, 150, 60), XStringFormats.Center);   
 
+           
 
             // Draw Rectangle 
             XPen pen = new XPen(XColors.Blue, Math.PI);
@@ -48,43 +69,12 @@ namespace ConsoleApplication1
 
 
             //Draw Med-Pass Logo
-            DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\GitHub\\PDFGeneration\\ConsoleApplication1\\ConsoleApplication1\\Images\\MedPassLogo.jpg", 75, 15, 129, 36);
+            DrawImage(XgraphicTest, "C:\\Users\\pfloyd13\\Desktop\\GitHub\\PDFGeneration\\ConsoleApplication1\\ConsoleApplication1\\Images\\MedPassLogo.jpg", 75, 15, 129, 36);
 
-            Console.WriteLine("Please enter your name:");
-            Console.Write(">  ");
-            String name = Console.ReadLine();
 
-            Console.WriteLine("How many immunizations are Required?");
-            Console.Write(">  ");
-            string buffer = Console.ReadLine();
-            int requiredImmunizations = Int32.Parse(buffer);
-            int counter = 0;
-            List<string> requiredImmunizationNames = new List<string>;
-
-            if (requiredImmunizations != 0)
-            { 
-                while (counter < requiredImmunizations)
-                {
-                    Console.WriteLine("Please enter the name of an immunization:");
-                    Console.Write(">  ");
-
-                    requiredImmunizationNames.Add(Console.ReadLine());
-                }
-            }
             
 
-            XgraphicTest.DrawString("Student Name: " + name, font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
-            DrawRectangle(XgraphicTest, requiredImmunizations);
-
-            counter = 0;
-            while (counter < requiredImmunizations)
-            {
-                XgraphicTest.DrawString(requiredImmunizationNames[counter], font3, XBrushes.Black, new XRect(80, 110, 0, 0), XStringFormats.Center);
-            }
-
-
-
-
+            
             //Save The Doc 
             const string filename = "MeddPassTestDoc2.pdf";
             document.Save(filename);
