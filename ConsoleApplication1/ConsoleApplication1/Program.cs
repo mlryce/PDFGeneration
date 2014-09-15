@@ -106,8 +106,7 @@ namespace ConsoleApplication1
                         counter++;
                     }
                 }
-
-
+               
                 //writing to pdf 
                 XgraphicTest.DrawString("Date of Birth: " + dateFix, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
                 XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
