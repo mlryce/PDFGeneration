@@ -17,9 +17,10 @@ namespace ConsoleApplication1.classes
 
             public string get_student_name()
             {
-                return this.student_first_name + this.student_last_name;
+                return this.student_first_name + " " + this.student_last_name;
             }
-            public void set_student_first_name(string fn){
+            public void set_student_first_name(string fn)
+            {
                 this.student_first_name = fn;
             }
             public void set_student_last_name(string ln)
