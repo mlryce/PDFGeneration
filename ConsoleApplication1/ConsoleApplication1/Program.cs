@@ -52,37 +52,45 @@ namespace ConsoleApplication1
                 XPen pen = new XPen(XColors.Blue, Math.PI);
                  
                 // Draw Logo
-                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 30, 15, 177, 48);
+                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 105, 20, 180, 55);
 
+                // Draw Data Matrix
+                DrawImage(XgraphicTest, "..\\..\\Images\\Data-Matrix_Roemerind.jpg", 10, 10, 95, 95);
 
                 //Get user input 
-                Console.WriteLine("Please enter your first name:");
-                Console.Write(">  ");
-                String fname = Console.ReadLine();
-                Console.WriteLine("Please enter your last name:");
-                Console.Write(">  ");
-                String lname = Console.ReadLine();
-                Console.WriteLine("Please enter your DOB:");
-                string buffer = Console.ReadLine();
-                DateTime DOB = DateTime.Now;
-                bool flag = false;
+                //Console.WriteLine("Please enter your first name:");
+                //Console.Write(">  ");
+                //String fname = Console.ReadLine();
+                //Console.WriteLine("Please enter your last name:");
+                //Console.Write(">  ");
+                //String lname = Console.ReadLine();
+                //Console.WriteLine("Please enter your DOB:");
+                //string buffer = Console.ReadLine();
+                //DateTime DOB = DateTime.Now;
+                //bool flag = false;
 
-                while (flag == false)
-                {
-                    if (DateTime.TryParse(buffer, out DOB))
-                    {
-                        flag = true;
-                        Console.WriteLine("DOB Successfully entered.");
+                //while (flag == false)
+                //{
+                //    if (DateTime.TryParse(buffer, out DOB))
+                //    {
+                //        flag = true;
+                //        Console.WriteLine("DOB Successfully entered.");
 
-                    }
-                    else
-                    {
-                        flag = false;
-                        Console.WriteLine("Please enter a valid date of birth in the format x/xx/xxxx");
-                        buffer = Console.ReadLine();
-                    }
-                }
+                //    }
+                //    else
+                //    {
+                //        flag = false;
+                //        Console.WriteLine("Please enter a valid date of birth in the format x/xx/xxxx");
+                //        buffer = Console.ReadLine();
+                //    }
+                //}
 
+                Console.WriteLine("Please enter your Student ID");
+                int ID = int.Parse(Console.ReadLine());
+
+                Student student = db.Students.Find(ID);
+
+                
                 Console.WriteLine("How many immunizations are Required?");
                 Console.Write(">  ");
                 string buffer1 = Console.ReadLine();
@@ -91,9 +99,13 @@ namespace ConsoleApplication1
                 List<string> requiredImmunizationNames = new List<string>();
 
                 //writing user input to database 
-                DOB.ToString();
-                DateTime dateOnly = DOB.Date;
-                string dateFix = dateOnly.ToString("d"); 
+                student.student_dob.ToString();
+                DateTime dateOnly = student.student_dob.Date;
+                string dateFix = dateOnly.ToString("d");
+
+                //var student = new Student { student_first_name = fname, student_last_name = lname, student_dob = DOB};
+                //db.Students.Add(student);
+                //db.SaveChanges();
 
                 if (requiredImmunizations != 0)
                 {
@@ -109,13 +121,14 @@ namespace ConsoleApplication1
                
                 //writing to pdf 
                 XgraphicTest.DrawString("Date of Birth: " + dateFix, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
-                XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
+                XgraphicTest.DrawString("Student Name: " + student.student_first_name + " " + student.student_last_name, studentFont, XBrushes.Black, new XRect(110, 90, 0, 0), XStringFormats.Default);
                 //Required Immunizations Rectangle 1 - Major Rectangle
                 DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
                 //Required Immunizations Rectangle 2 - Dividing Rectangle
                 DrawRectangle(XgraphicTest, 105, 100, 470, requiredImmunizations * 20);
                 //DrawImage(XgraphicTest, );
                 counter = 0;
+
                 while (counter < requiredImmunizations)
                 {
                     int veriticalPosition = 20 * counter;

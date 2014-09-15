@@ -15,7 +15,7 @@ namespace ConsoleApplication1.classes
         public string student_first_name { get; set; }
         public string student_last_name { get; set; }
         public DateTime student_dob { get; set; }
-        public organization student_school { get; set; }
+        //public organization student_school { get; set; }
         
 
             //public string get_student_name()
