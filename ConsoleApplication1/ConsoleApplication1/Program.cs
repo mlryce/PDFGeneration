@@ -9,6 +9,8 @@ using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApplication1
 {
@@ -16,6 +18,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            
             //Creating New PDF Doc. 
             PdfDocument document = new PdfDocument();
             document.Info.Title = "Created By MedPass Team";
@@ -47,23 +50,46 @@ namespace ConsoleApplication1
             // Draw Rectangle 
             XPen pen = new XPen(XColors.Blue, Math.PI);
 
-
-
-
-            //Draw Med-Pass Logo
            
-
-            Console.WriteLine("Please enter your name:");
+            //Get user input 
+            Console.WriteLine("Please enter your first name:");
             Console.Write(">  ");
-            String name = Console.ReadLine();
+            String fname = Console.ReadLine();
+            Console.WriteLine("Please enter your last name:");
+            Console.Write(">  ");
+            String lname = Console.ReadLine(); 
             Console.WriteLine("Please enter your DOB:"); 
-            string DOB = Console.ReadLine(); 
+            string buffer = Console.ReadLine();
+            DateTime DOB = DateTime.Parse(buffer); 
             Console.WriteLine("How many immunizations are Required?");
             Console.Write(">  ");
-            string buffer = Console.ReadLine();
-            int requiredImmunizations = Int32.Parse(buffer);
+            string buffer1 = Console.ReadLine();
+            int requiredImmunizations = Int32.Parse(buffer1);
             int counter = 0;
             List<string> requiredImmunizationNames = new List<string>();
+
+
+            //writing user input to database 
+            using (var db = new StudentDb()) 
+            {
+                var student = new StudentInformationGathering { StudentFirstName = fname, StudentLastName = lname, StudentDOB = DOB, StudentInformationGatheringID=1};
+                db.StudentInformationGathering.Add(student);
+                db.SaveChanges();
+
+                var query = from b in db.StudentInformationGathering
+                            orderby b.StudentFirstName
+                            select b;
+
+                Console.WriteLine("All students in DB"); 
+                foreach (var item in query )
+                {
+                    Console.WriteLine(item.StudentFirstName); 
+                }
+                Console.WriteLine("press any key to exit");
+                Console.ReadKey(); 
+            }
+           
+
 
             if (requiredImmunizations != 0)
             { 
@@ -78,7 +104,7 @@ namespace ConsoleApplication1
             }
 
             XgraphicTest.DrawString("Date of Birth: " + DOB, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center); 
-            XgraphicTest.DrawString("Student Name: " + name, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
+            XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
             //Required Immunizations Rectangle 1 - Major Rectangle
             DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
             //Required Immunizations Rectangle 2 - Dividing Rectangle
