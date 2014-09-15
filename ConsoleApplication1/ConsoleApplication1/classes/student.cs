@@ -14,7 +14,6 @@ namespace ConsoleApplication1.classes
         DateTime student_dob;
         organization student_school;
         
-
             public string get_student_name()
             {
                 return this.student_first_name + " " + this.student_last_name;
