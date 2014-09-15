@@ -52,7 +52,6 @@
     <Compile Include="classes\immunization_form.cs" />
     <Compile Include="classes\organization.cs" />
     <Compile Include="classes\signature_box.cs" />
-    <Compile Include="classes\student.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,7 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Data-Matrix_Roemerind.jpg" />
     <Content Include="Images\MedPassLogo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
