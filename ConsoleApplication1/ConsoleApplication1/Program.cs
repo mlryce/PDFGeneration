@@ -29,7 +29,7 @@ namespace ConsoleApplication1
 
 
             //Xgraphics object used for drawing 
-            XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
+            XGraphics XgraphicTest = XGraphics.FromPdfPage(page );
 
 
 
