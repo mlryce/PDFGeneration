@@ -52,8 +52,10 @@ namespace ConsoleApplication1
                 XPen pen = new XPen(XColors.Blue, Math.PI);
 
                 // Draw Logo
-                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 30, 15, 177, 48);
+                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 105, 20, 180, 55);
 
+                // Draw Data Matrix
+                DrawImage(XgraphicTest, "..\\..\\Images\\Data-Matrix_Roemerind.jpg", 10, 10, 95, 95);
 
                 //Get user input 
                 Console.WriteLine("Please enter your first name:");
@@ -109,7 +111,7 @@ namespace ConsoleApplication1
                
                 //writing to pdf 
                 XgraphicTest.DrawString("Date of Birth: " + dateFix, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
-                XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
+                XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(110, 90, 0, 0), XStringFormats.Default);
                 //Required Immunizations Rectangle 1 - Major Rectangle
                 DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
                 //Required Immunizations Rectangle 2 - Dividing Rectangle
