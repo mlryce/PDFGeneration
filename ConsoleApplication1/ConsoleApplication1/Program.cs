@@ -11,6 +11,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using ConsoleApplication1.classes;
 
 namespace ConsoleApplication1
 {
@@ -18,6 +19,12 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+
+            using (var db = new StudentContext())
+            {
+            
+            
+            }
 
             //Creating New PDF Doc. 
             PdfDocument document = new PdfDocument();
@@ -27,9 +34,8 @@ namespace ConsoleApplication1
             PdfPage page = document.AddPage();
 
 
-
             //Xgraphics object used for drawing 
-            XGraphics XgraphicTest = XGraphics.FromPdfPage(page );
+            XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
 
 
 
@@ -73,23 +79,7 @@ namespace ConsoleApplication1
 
 
             //writing user input to database 
-            using (var db = new StudentDb())
-            {
-                var student = new StudentInformationGathering { StudentFirstName = fname, StudentLastName = lname, StudentDOB = DOB, StudentInformationGatheringID = 1 };
-                db.StudentInformationGathering.Add(student);
-                db.SaveChanges();
 
-                var query = from b in db.StudentInformationGathering
-                            orderby b.StudentFirstName
-                            select b;
-
-                Console.WriteLine("All students in DB");
-                foreach (var item in query)
-                {
-                    Console.WriteLine(item.StudentFirstName);
-                }
-                Console.WriteLine("press any key to exit");
-                Console.ReadKey();
 
 
 
@@ -130,7 +120,7 @@ namespace ConsoleApplication1
 
             }
 
-        }
+      
 
         static void DrawRectangle(XGraphics gfx, int x, int y, int width, int height)
         {

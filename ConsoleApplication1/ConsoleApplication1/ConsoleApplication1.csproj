@@ -61,7 +61,8 @@
     <Compile Include="classes\immunization_form.cs" />
     <Compile Include="classes\organization.cs" />
     <Compile Include="classes\signature_box.cs" />
-    <Compile Include="classes\student.cs" />
+    <Compile Include="classes\Student.cs" />
+    <Compile Include="classes\StudentContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
