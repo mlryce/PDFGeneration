@@ -57,55 +57,84 @@ namespace ConsoleApplication1
                 // Draw Data Matrix
                 DrawImage(XgraphicTest, "..\\..\\Images\\Data-Matrix_Roemerind.jpg", 10, 10, 95, 95);
 
-                //Get user input 
-                //Console.WriteLine("Please enter your first name:");
-                //Console.Write(">  ");
-                //String fname = Console.ReadLine();
-                //Console.WriteLine("Please enter your last name:");
-                //Console.Write(">  ");
-                //String lname = Console.ReadLine();
-                //Console.WriteLine("Please enter your DOB:");
-                //string buffer = Console.ReadLine();
-                //DateTime DOB = DateTime.Now;
-                //bool flag = false;
+                Console.WriteLine("Please choose an option:");
+                Console.WriteLine("1. Pull student from database");
+                Console.WriteLine("2. Write student to database");
 
-                //while (flag == false)
-                //{
-                //    if (DateTime.TryParse(buffer, out DOB))
-                //    {
-                //        flag = true;
-                //        Console.WriteLine("DOB Successfully entered.");
+                string response = Console.ReadLine();
+                string dateFix = "";
+                Student student = new Student();
 
-                //    }
-                //    else
-                //    {
-                //        flag = false;
-                //        Console.WriteLine("Please enter a valid date of birth in the format x/xx/xxxx");
-                //        buffer = Console.ReadLine();
-                //    }
-                //}
+                while ((response != "1") && (response != "2"))
+                {
+                    Console.WriteLine("Please enter either 1 or 2");
+                    response = Console.ReadLine();
+                }
 
-                Console.WriteLine("Please enter your Student ID");
-                int ID = int.Parse(Console.ReadLine());
+                if (response == "1")
+                {
 
-                Student student = db.Students.Find(ID);
+                    Console.WriteLine("Please enter your Student ID");
+                    int ID = int.Parse(Console.ReadLine());
 
-                
+                    student = db.Students.Find(ID);
+
+                    //writing user input to database 
+                    student.student_dob.ToString();
+                    DateTime dateOnly = student.student_dob.Date;
+                    dateFix = dateOnly.ToString("d");
+                }
+                //Option 2
+                else 
+                {
+                    //Get user input 
+                    Console.WriteLine("Please enter your first name:");
+                    Console.Write(">  ");
+                    String fname = Console.ReadLine();
+                    Console.WriteLine("Please enter your last name:");
+                    Console.Write(">  ");
+                    String lname = Console.ReadLine();
+                    Console.WriteLine("Please enter your DOB:");
+                    string buffer = Console.ReadLine();
+                    DateTime DOB = DateTime.Now;
+                    bool flag = false;
+
+                    while (flag == false)
+                    {
+                        if (DateTime.TryParse(buffer, out DOB))
+                        {
+                            flag = true;
+                            Console.WriteLine("DOB Successfully entered.");
+
+                        }
+                        else
+                        {
+                            flag = false;
+                            Console.WriteLine("Please enter a valid date of birth in the format x/xx/xxxx");
+                            buffer = Console.ReadLine();
+                        }
+                    }
+
+
+
+                    student = new Student { student_first_name = fname, student_last_name = lname, student_dob = DOB };
+
+                    student.student_dob.ToString();
+                    DateTime dateOnly = student.student_dob.Date;
+                    dateFix = dateOnly.ToString("d");
+
+                    db.Students.Add(student);
+                    db.SaveChanges();
+                }
+                //End Option 2
+
+
                 Console.WriteLine("How many immunizations are Required?");
                 Console.Write(">  ");
                 string buffer1 = Console.ReadLine();
                 int requiredImmunizations = Int32.Parse(buffer1);
                 int counter = 0;
                 List<string> requiredImmunizationNames = new List<string>();
-
-                //writing user input to database 
-                student.student_dob.ToString();
-                DateTime dateOnly = student.student_dob.Date;
-                string dateFix = dateOnly.ToString("d");
-
-                //var student = new Student { student_first_name = fname, student_last_name = lname, student_dob = DOB};
-                //db.Students.Add(student);
-                //db.SaveChanges();
 
                 if (requiredImmunizations != 0)
                 {
