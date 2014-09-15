@@ -37,4 +37,3 @@ C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleAppli
 C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\PdfSharp.Charting.xml
 C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\de\PdfSharp.resources.dll
 C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\bin\Debug\de\PdfSharp.Charting.resources.dll
-C:\Users\mryce12\Documents\GitHub\PDFGeneration\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
