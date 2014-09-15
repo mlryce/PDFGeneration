@@ -50,7 +50,7 @@ namespace ConsoleApplication1
 
                 // Draw Rectangle 
                 XPen pen = new XPen(XColors.Blue, Math.PI);
-
+                 
                 // Draw Logo
                 DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 30, 15, 177, 48);
 
