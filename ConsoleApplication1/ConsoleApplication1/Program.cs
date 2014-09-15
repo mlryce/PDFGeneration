@@ -9,9 +9,8 @@ using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
-using ConsoleApplication1.classes;
-using PdfSharp.Drawing.Layout;
-
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApplication1
 {
@@ -19,91 +18,122 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            string schoolname1 = "The University of Alabama";
-            string schoolname2 = "Auburn Sucks bad";
 
-
-            organization school = new organization(schoolname1);
-            immunization_form this_form = new immunization_form(school);
-            student stud = new student();
-
-            
-           
             //Creating New PDF Doc. 
             PdfDocument document = new PdfDocument();
-            document.Info.Title = "Created By MedPass Team"; 
+            document.Info.Title = "Created By MedPass Team";
 
             //Creating empty page 
             PdfPage page = document.AddPage();
-         
-         
+
+
 
             //Xgraphics object used for drawing 
             XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
-            XTextFormatter tf = new XTextFormatter(XgraphicTest);
-          
-         
+
+
 
             //Creating a font 
             XFont font = new XFont("Arial", 20, XFontStyle.Bold);
-            XFont font2 = new XFont("Arial", 15, XFontStyle.Bold); 
-            XFont font3 = new XFont("Arial", 10, XFontStyle.Bold);
-            XFont fineprint = new XFont("Times New Roman", 9, XFontStyle.Italic); 
+            XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
+            XFont studentFont = new XFont("Arial", 14, XFontStyle.Bold);
+            XFont immunFont = new XFont("Arial", 12, XFontStyle.Bold);
+            XFont topStatement = new XFont("Arial", 10, XFontStyle.Regular);
 
             //Drawing the text  
-            
+
             XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370, 5, 150, 60), XStringFormats.Center);
             XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
-            tf.Alignment = XParagraphAlignment.Justify;
-            tf.DrawString(this_form.treatment_consent_text, fineprint, XBrushes.Black, new XRect(50, 500, 550, 200), XStringFormats.TopLeft);
-           
-            
+            XgraphicTest.DrawString("Complete and upload to medpasshealth.com by 12/01/1776", topStatement, XBrushes.Black, new XRect(377, 40, 150, 60), XStringFormats.Center);
+
+
             // Draw Rectangle 
             XPen pen = new XPen(XColors.Blue, Math.PI);
-   
 
 
-
-            //Draw Med-Pass Logo
-            //DrawImage(XgraphicTest, "C:\\Users\\aray13\\Documents\\MedPassLogo.jpg", 75, 15, 129, 36);
-
-
-
-            Console.WriteLine("Please enter your name:");
+            //Get user input 
+            Console.WriteLine("Please enter your first name:");
             Console.Write(">  ");
-            String name = Console.ReadLine();
-
+            String fname = Console.ReadLine();
+            Console.WriteLine("Please enter your last name:");
+            Console.Write(">  ");
+            String lname = Console.ReadLine();
+            Console.WriteLine("Please enter your DOB:");
+            string buffer = Console.ReadLine();
+            DateTime DOB = DateTime.Parse(buffer);
             Console.WriteLine("How many immunizations are Required?");
             Console.Write(">  ");
-            string buffer = Console.ReadLine();
-            int requiredImmunizations = Int32.Parse(buffer);
+            string buffer1 = Console.ReadLine();
+            int requiredImmunizations = Int32.Parse(buffer1);
+            int counter = 0;
+            List<string> requiredImmunizationNames = new List<string>();
 
-            XgraphicTest.DrawString("Student Name: " + stud.get_student_name(), font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
-        
-        
-            DrawRectangle(XgraphicTest, requiredImmunizations);
 
-        
-            //Save The Doc 
-            const string filename = "MeddPassTestDoc2.pdf";
-            document.Save(filename);
-            Process.Start(filename);
+            //writing user input to database 
+            using (var db = new StudentDb())
+            {
+                var student = new StudentInformationGathering { StudentFirstName = fname, StudentLastName = lname, StudentDOB = DOB, StudentInformationGatheringID = 1 };
+                db.StudentInformationGathering.Add(student);
+                db.SaveChanges();
 
-            //data_matrix dm = new data_matrix();
-            
+                var query = from b in db.StudentInformationGathering
+                            orderby b.StudentFirstName
+                            select b;
+
+                Console.WriteLine("All students in DB");
+                foreach (var item in query)
+                {
+                    Console.WriteLine(item.StudentFirstName);
+                }
+                Console.WriteLine("press any key to exit");
+                Console.ReadKey();
+
+
+
+                if (requiredImmunizations != 0)
+                {
+                    while (counter < requiredImmunizations)
+                    {
+                        Console.WriteLine("Please enter the name of an immunization:");
+                        Console.Write(">  ");
+
+                        requiredImmunizationNames.Add(Console.ReadLine());
+                        counter++;
+                    }
+                }
+
+
+                //writing to pdf 
+                XgraphicTest.DrawString("Date of Birth: " + DOB, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
+                XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
+                //Required Immunizations Rectangle 1 - Major Rectangle
+                DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
+                //Required Immunizations Rectangle 2 - Dividing Rectangle
+                DrawRectangle(XgraphicTest, 105, 100, 470, requiredImmunizations * 20);
+                //DrawImage(XgraphicTest, );
+                counter = 0;
+                while (counter < requiredImmunizations)
+                {
+                    int veriticalPosition = 20 * counter;
+                    XgraphicTest.DrawString(requiredImmunizationNames[counter], immunFont, XBrushes.Black, new XRect(40, 115 + veriticalPosition, 0, 0), XStringFormats.Default);
+
+                    counter++;
+                }
+
+                //Save The Doc 
+                const string filename = "MeddPassTestDoc2.pdf";
+                document.Save(filename);
+                Process.Start(filename);
+
+            }
+
         }
 
-        //static void DrawImage(XGraphics gfx, string jpegSamplePath, int x, int y, int width, int height)
-        //{
-        //    XImage image = XImage.FromFile(jpegSamplePath);
-        //    gfx.DrawImage(image, x, y, width, height);
-        //} 
-
-        static void DrawRectangle(XGraphics gfx, int requiredImmunizations)
+        static void DrawRectangle(XGraphics gfx, int x, int y, int width, int height)
         {
             XPen pen = new XPen(XColors.Black, Math.PI);
-
-            gfx.DrawRectangle(pen, 25, 100, 560, requiredImmunizations * 50);
+            
+            gfx.DrawRectangle(pen, x, y, width, height);
         }
     }
 }
