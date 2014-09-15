@@ -51,8 +51,6 @@ namespace ConsoleApplication1
 
 
             //Draw Med-Pass Logo
-           
-
             Console.WriteLine("Please enter your name:");
             Console.Write(">  ");
             String name = Console.ReadLine();
@@ -79,16 +77,25 @@ namespace ConsoleApplication1
 
             XgraphicTest.DrawString("Date of Birth: " + DOB, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center); 
             XgraphicTest.DrawString("Student Name: " + name, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
-            //Required Immunizations Rectangle 1 - Major Rectangle
-            DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
+
+            //Major Rectangle - 
+            DrawRectangle(XgraphicTest, 15, 100, 560, 50 + requiredImmunizations * 20);
+            //Required Immunizations Rectangle 1 - Divides Categories from immunizations - Horizontally
+            DrawRectangle(XgraphicTest, 15, 150, 560, requiredImmunizations * 20);
             //Required Immunizations Rectangle 2 - Dividing Rectangle
-            DrawRectangle(XgraphicTest, 105, 100, 470, requiredImmunizations * 20);
+            DrawRectangle(XgraphicTest, 105, 100, 470, 50 + requiredImmunizations * 20);
             //DrawImage(XgraphicTest, );
             counter = 0;
+
+            //Required Immunizations Categories
+            XgraphicTest.DrawString("Immunization", immunFont, XBrushes.Black, new XRect(20, 115, 0, 0), XStringFormats.Default);
+            XgraphicTest.DrawString("Name", immunFont, XBrushes.Black, new XRect(20, 130, 0, 0), XStringFormats.Default);
+
+
             while (counter < requiredImmunizations)
             {
                 int veriticalPosition = 20 * counter;
-                XgraphicTest.DrawString(requiredImmunizationNames[counter], immunFont, XBrushes.Black, new XRect(40, 115 + veriticalPosition, 0, 0), XStringFormats.Default);
+                XgraphicTest.DrawString(requiredImmunizationNames[counter], immunFont, XBrushes.Black, new XRect(30, 165 + veriticalPosition, 0, 0), XStringFormats.Default);
 
                 counter++;
             }
