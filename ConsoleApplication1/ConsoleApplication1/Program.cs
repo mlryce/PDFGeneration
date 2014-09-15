@@ -22,66 +22,75 @@ namespace ConsoleApplication1
 
             using (var db = new StudentContext())
             {
-            
-            
-            }
 
-            //Creating New PDF Doc. 
-            PdfDocument document = new PdfDocument();
-            document.Info.Title = "Created By MedPass Team";
+                //Creating New PDF Doc. 
+                PdfDocument document = new PdfDocument();
+                document.Info.Title = "Created By MedPass Team";
 
-            //Creating empty page 
-            PdfPage page = document.AddPage();
+                //Creating empty page 
+                PdfPage page = document.AddPage();
 
 
-            //Xgraphics object used for drawing 
-            XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
+                //Xgraphics object used for drawing 
+                XGraphics XgraphicTest = XGraphics.FromPdfPage(page);
+
+                //Creating a font 
+                XFont font = new XFont("Arial", 20, XFontStyle.Bold);
+                XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
+                XFont studentFont = new XFont("Arial", 14, XFontStyle.Bold);
+                XFont immunFont = new XFont("Arial", 12, XFontStyle.Bold);
+                XFont topStatement = new XFont("Arial", 10, XFontStyle.Regular);
+
+                //Drawing the text  
+
+                XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370, 5, 150, 60), XStringFormats.Center);
+                XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
+                XgraphicTest.DrawString("Complete and upload to medpasshealth.com by 12/01/1776", topStatement, XBrushes.Black, new XRect(377, 40, 150, 60), XStringFormats.Center);
 
 
-
-            //Creating a font 
-            XFont font = new XFont("Arial", 20, XFontStyle.Bold);
-            XFont font2 = new XFont("Arial", 15, XFontStyle.Bold);
-            XFont studentFont = new XFont("Arial", 14, XFontStyle.Bold);
-            XFont immunFont = new XFont("Arial", 12, XFontStyle.Bold);
-            XFont topStatement = new XFont("Arial", 10, XFontStyle.Regular);
-
-            //Drawing the text  
-
-            XgraphicTest.DrawString("MedPass Immunization Form", font, XBrushes.Black, new XRect(370, 5, 150, 60), XStringFormats.Center);
-            XgraphicTest.DrawString("Print clearly using blue or black ink", font2, XBrushes.Black, new XRect(383, 25, 150, 60), XStringFormats.Center);
-            XgraphicTest.DrawString("Complete and upload to medpasshealth.com by 12/01/1776", topStatement, XBrushes.Black, new XRect(377, 40, 150, 60), XStringFormats.Center);
+                // Draw Rectangle 
+                XPen pen = new XPen(XColors.Blue, Math.PI);
 
 
-            // Draw Rectangle 
-            XPen pen = new XPen(XColors.Blue, Math.PI);
+                //Get user input 
+                Console.WriteLine("Please enter your first name:");
+                Console.Write(">  ");
+                String fname = Console.ReadLine();
+                Console.WriteLine("Please enter your last name:");
+                Console.Write(">  ");
+                String lname = Console.ReadLine();
+                Console.WriteLine("Please enter your DOB:");
+                string buffer = Console.ReadLine();
+                DateTime DOB = DateTime.Now;
+                bool flag = false;
 
-            // Draw Med+Pass Logo
-            DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 50, 50, 50, 50);
+                while (flag == false)
+                {
+                    if (DateTime.TryParse(buffer, out DOB))
+                    {
+                        flag = true;
+                        Console.WriteLine("DOB Successfully entered.");
 
+                    }
+                    else
+                    {
+                        flag = false;
+                        Console.WriteLine("Please enter a valid date of birth in the format x/xx/xxxx");
+                        buffer = Console.ReadLine();
+                    }
+                }
 
-            //Get user input 
-            Console.WriteLine("Please enter your first name:");
-            Console.Write(">  ");
-            String fname = Console.ReadLine();
-            Console.WriteLine("Please enter your last name:");
-            Console.Write(">  ");
-            String lname = Console.ReadLine();
-            Console.WriteLine("Please enter your DOB:");
-            string buffer = Console.ReadLine();
-            DateTime DOB = DateTime.Parse(buffer);
-            Console.WriteLine("How many immunizations are Required?");
-            Console.Write(">  ");
-            string buffer1 = Console.ReadLine();
-            int requiredImmunizations = Int32.Parse(buffer1);
-            int counter = 0;
-            List<string> requiredImmunizationNames = new List<string>();
+                Console.WriteLine("How many immunizations are Required?");
+                Console.Write(">  ");
+                string buffer1 = Console.ReadLine();
+                int requiredImmunizations = Int32.Parse(buffer1);
+                int counter = 0;
+                List<string> requiredImmunizationNames = new List<string>();
 
-
-            //writing user input to database 
-
-
-
+                //writing user input to database 
+                DOB.ToString();
+                DateTime dateOnly = DOB.Date;
+                string dateFix = dateOnly.ToString("d"); 
 
                 if (requiredImmunizations != 0)
                 {
@@ -97,7 +106,7 @@ namespace ConsoleApplication1
 
 
                 //writing to pdf 
-                XgraphicTest.DrawString("Date of Birth: " + DOB, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
+                XgraphicTest.DrawString("Date of Birth: " + dateFix, studentFont, XBrushes.Black, new XRect(430, 54, 150, 60), XStringFormats.Center);
                 XgraphicTest.DrawString("Student Name: " + fname + " " + lname, studentFont, XBrushes.Black, new XRect(60, 90, 0, 0), XStringFormats.Default);
                 //Required Immunizations Rectangle 1 - Major Rectangle
                 DrawRectangle(XgraphicTest, 15, 100, 560, requiredImmunizations * 20);
@@ -119,7 +128,7 @@ namespace ConsoleApplication1
                 Process.Start(filename);
 
             }
-
+        }
       
 
         static void DrawRectangle(XGraphics gfx, int x, int y, int width, int height)
@@ -127,12 +136,6 @@ namespace ConsoleApplication1
             XPen pen = new XPen(XColors.Black, Math.PI);
             
             gfx.DrawRectangle(pen, x, y, width, height);
-        }
-
-        static void DrawImage(XGraphics gfx, string jpegSameplePath, int x, int y, int width, int height)
-        {
-            XImage image = XImage.FromFile(jpegSameplePath);
-            gfx.DrawImage(image, x, y, width, height);
         }
     }
 }
