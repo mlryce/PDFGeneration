@@ -51,6 +51,9 @@ namespace ConsoleApplication1
                 // Draw Rectangle 
                 XPen pen = new XPen(XColors.Blue, Math.PI);
 
+                // Draw Logo
+                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 50, 50, 50, 50);
+
 
                 //Get user input 
                 Console.WriteLine("Please enter your first name:");
@@ -136,6 +139,12 @@ namespace ConsoleApplication1
             XPen pen = new XPen(XColors.Black, Math.PI);
             
             gfx.DrawRectangle(pen, x, y, width, height);
+        }
+
+        static void DrawImage(XGraphics gfx, string jpegSameplePath, int x, int y, int width, int height)
+        {
+            XImage image = XImage.FromFile(jpegSameplePath);
+            gfx.DrawImage(image, x, y, width, height);
         }
     }
 }
