@@ -25,6 +25,9 @@ namespace ConsoleApplication1
 
             organization school = new organization(schoolname1);
             immunization_form this_form = new immunization_form(school);
+            student stud = new student();
+
+            
            
             //Creating New PDF Doc. 
             PdfDocument document = new PdfDocument();
@@ -75,7 +78,7 @@ namespace ConsoleApplication1
             string buffer = Console.ReadLine();
             int requiredImmunizations = Int32.Parse(buffer);
 
-            XgraphicTest.DrawString("Student Name: " + name, font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
+            XgraphicTest.DrawString("Student Name: " + stud.get_student_name(), font3, XBrushes.Black, new XRect(140, 60, 0, 0), XStringFormats.Center);
         
         
             DrawRectangle(XgraphicTest, requiredImmunizations);
