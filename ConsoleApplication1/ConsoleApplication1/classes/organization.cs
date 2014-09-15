@@ -6,15 +6,28 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1.classes
 {
-    class organization
+    public class organization
     {
-        private string organization_name;
+        public string organization_name;
             public string get_organization_name(){
                 return this.organization_name;
             }
             public void set_organization_name(string name){
                 this.organization_name = name;
             }
+
+            public organization(string name){
+
+                this.organization_name = name;
+
+            }
+
+            public organization()
+            {
+                // TODO: Complete member initialization
+            }
+   
+    }
                
     }
-}
+
