@@ -52,7 +52,7 @@ namespace ConsoleApplication1
                 XPen pen = new XPen(XColors.Blue, Math.PI);
 
                 // Draw Logo
-      
+                DrawImage(XgraphicTest, "..\\..\\Images\\MedPassLogo.jpg", 30, 15, 177, 48);
 
 
                 //Get user input 
